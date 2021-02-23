@@ -27,9 +27,10 @@ router.route('/:id')
             .exec((err, done) => {
                 if (err)
                     return next(err);
-                if (req.loggedInUser.book)
-                    return next({ message: 'Already Booked, You can Book Only One Room' });
-                req.loggedInUser.book = req.params.id;
+                req.loggedInUser.book = false;
+                /* if (req.loggedInUser.book)
+                    return next({ message: 'Already Booked, You can Book Only One Room' }); */
+                /*  req.loggedInUser.book = req.params.id; */
                 req.loggedInUser.save((err, saved) => {
                     if (err)
                         return next(err);

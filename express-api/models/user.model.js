@@ -44,7 +44,7 @@ var userSchema = new Schema({
     },
     book: {
         type: String,
-        default: null
+        default: false
     }
 }, {
     timestamps: true

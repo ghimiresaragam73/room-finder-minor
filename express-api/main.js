@@ -14,6 +14,7 @@ const userRoutes = require('./controllers/user.routes');
 const roomRoutes = require('./controllers/room.routes');
 const cartRoutes = require('./controllers/cart.routes');
 const bookingRoutes = require('./controllers/booking.routes');
+const commentRoutes = require('./controllers/comment.routes');
 
 express.use(bodyParser.urlencoded({ extended: false }));
 express.use(bodyParser.json());
@@ -28,6 +29,7 @@ express.use('/user', authenticate, userRoutes);
 express.use('/room', roomRoutes);
 express.use('/cart', authenticate, cartRoutes);
 express.use('/book', authenticate, bookingRoutes);
+express.use('/comment', commentRoutes);
 
 express.use((req, res, next) => {
     next({

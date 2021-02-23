@@ -129,13 +129,13 @@
 
 
 
-    <!-- <section>
-      
-    </section> -->
+    <section *ngIf="isMapCheck">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="16">
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </section>
 
-
-
-
+    <app-footer></app-footer>
 </body>
 
 </html>
