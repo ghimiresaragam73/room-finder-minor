@@ -1,0 +1,30 @@
+<div id="container">
+    <form #loginForm="ngForm" class="form-group && center && contain " novalidate>
+        <h3>
+            Sign In Room Finder
+        </h3>
+        <br>
+
+        <label for="username">Username:</label><br>
+        <input class="form-control && color" type="text" id="username" name="username" [(ngModel)]="user.username" required
+            #username="ngModel">
+        <div class="danger" [hidden]="username.valid || username.pristine">
+            required field*
+        </div>
+        <br>
+
+        <label for="password">Password:</label>
+        <input class="form-control && color" type="password" id="password" name="password" [(ngModel)]="user.password"
+            required #password="ngModel">
+        <div class="danger" *ngIf="password.invalid && password.dirty">required field*</div>
+
+
+        <br><button [disabled]="loginForm.invalid" class="btn btn-primary &&  button" (click)="login()">Login</button><br>
+        <p>Don't have an account?</p>
+
+
+        <p><a class="link" routerLink="/auth/register">Register Here</a></p>
+        <p><a class="link" routerLink="/auth/forgot-password">Forgot Password?</a></p>
+    </form>
+
+</div>

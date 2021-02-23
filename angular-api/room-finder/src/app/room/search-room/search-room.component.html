@@ -1,0 +1,72 @@
+    <div id="container" *ngIf="!result">
+        <form #searchForm="ngForm" class="form-group && center && contain">
+            <h3>
+                Search Room
+            </h3>
+            <br>
+    
+            <label for="address" >Address</label>
+            <input type="text" class="form-control && color" id="address" [(ngModel)]="room.address" name="address"
+                placeholder="Enter the exact address" required #address="ngModel">
+            <div class="danger" [hidden]="address.valid || address.pristine">
+                required field*
+            </div>
+            <br>
+            
+            <label for="maxprice">Maxmium Price</label>
+            <input type="number" class="form-control && color" id="maxprice" [(ngModel)]="room.maxprice" name="maxprice"
+                placeholder="Enter the maximum price of room" #maxprice="ngModel">
+            <div class="danger" [hidden]="maxprice.valid || maxprice.pristine">
+                required field*
+            </div>
+            <br>
+            
+            <label for="minprice">Minimum Price</label>
+            <input type="number" class="form-control && color" id="minprice" [(ngModel)]="room.minprice" name="minprice"
+                placeholder="Enter the minimum price of room" #minprice="ngModel">
+            <div class="danger" [hidden]="minprice.valid || minprice.pristine">
+                required field*
+            </div>
+            <br>
+            
+            <button [disabled]="searchForm.invalid" class="btn btn-primary && button" (click)="search()">Search
+                Room</button>
+        </form>
+    
+    </div>
+<div *ngIf="result">
+    <div *ngIf="result"><h5><a (click)="searchAgain()">Search Again.</a></h5></div>
+    <app-list-room [data]="searchResult"></app-list-room>
+</div>
+
+
+
+
+
+
+<!-- <form #Searchroom="ngForm" class="form-group && container">
+    <h3>
+        Search Room As Per Your Need
+    </h3>
+    <br>
+    <label for="address"> Address</label>
+    <input type="text" class="form-control && wide" id="address" [(ngModel)]="user.address" name="address" placeholder="Enter the exact location" required
+        #address="ngModel">
+    <div class="danger" [hidden]="address.valid || address.pristine">
+        required field*
+    </div>
+      
+    <label for="maxprice">Maximum Price</label>
+    <input type="number" class="form-control && wide" id="maxprice" [(ngModel)]="user.maxprice" name="maxprice"
+        placeholder="Enter the maximum price of room" required #maxprice="ngModel">
+    <div class="danger" [hidden]="maxprice.valid || maxprice.pristine">
+        required field*
+    </div>
+    <label for="minprice"> Price</label>
+    <input type="number" class="form-control && wide" id="minprice" [(ngModel)]="user.minprice" name="minprice"
+        placeholder="Enter the minimum price of room" required #minprice="ngModel">
+    <div class="danger" [hidden]="minprice.valid || minprice.pristine">
+        required field*
+    </div>
+    <button [disabled]="Searchroom.invalid" class="btn btn-primary &&  roomButton && wide"
+        (click)="search()">Search Room</button> -->

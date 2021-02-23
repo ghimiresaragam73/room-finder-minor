@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<div *ngIf="loading">
+    <app-loader></app-loader>
+</div>
+<html *ngIf="!searching && !blockAll">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./home.component.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@200&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="./../../../assets/css/bootstrap.css"> -->
+
+</head>
+
+<section *ngIf="!loading">
+
+    <section>
+        <div class="box">
+
+            <div class="container">
+                <div class="outer">
+                    <div class="detail">
+                        <h1>
+                            Room Finder
+                        </h1>
+
+                        <p>Find the perfect room for your Living</p>
+                        <label for="address">
+                            <div class="header_search">
+                                <div class="input-container">
+                                    <input type="text" class="input-field" name="address" [(ngModel)]="address"
+                                        id="address">
+                                    <button class="input-button" (click)="search()">search</button>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section *ngIf="!isLoggedIn()">
+        <div class="box">
+            <div class="color">
+                <div class="row">
+                    <div class="col-2">
+                        <h1> Easy medium to find room !!</h1>
+                        <p>with your registration you have access to all the available best room around the country with
+                            their all facility and location </p>
+                        <button class="i3" routerLink="/auth/register">Get started &#10174; </button>
+
+                    </div>
+                    <div class="col-2">
+                        <img src="./../../../assets/room_img/6.jpg" alt="" class="image6">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <section *ngIf="!isLoggedIn()">
+        <div class="box">
+            <div class="color">
+                <div class="row">
+                    <div class="col-2">
+                        <img src="./../../../assets/room_img/5.jpg" alt="" class="image6">
+
+                    </div>
+                    <div class="col-2">
+                        <h1> Earn from your empty room !!</h1>
+                        <p>with your registration you have access to add all the available best room around the country
+                            with their all facility,priceing and location </p>
+                        <button class="i3" routerLink="/auth/register">Get started &#10174; </button>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Premiun roomes -->
+
+    <section>
+        <div class="box">
+            <h2 class="title"><a routerLink="/room/list" [queryParams]="{premium:true}"> Premium Rooms</a></h2>
+            <div class="small-container1">
+
+                <div *ngFor="let room of premium" class="row1">
+                    <div class="col-41" (click)="onClick(room._id)">
+                        <div *ngIf="room.image">
+                            <div>
+                                <img src="{{imgUrl}}{{room.image[0]}}" alt="">
+                            </div>
+
+                        </div>
+                        <div class=" contain">
+                            <p>Room available: {{room.numberOfRoom}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Price: <span>Rs.</span>{{room.price}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Address: {{room.address}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="input-B">
+                <button class="input-bt" routerLink="/room/list" [queryParams]="{premium:true}">View All Premium
+                    Rooms...</button>
+            </div>
+        </div>
+    </section>
+    <!-- urgent roomes -->
+
+
+    <section>
+        <div class="box">
+            <h2 class="title"><a routerLink="/room/list" [queryParams]="{urgent:true}"> Urgent Rooms</a></h2>
+            <div class="small-container1">
+
+                <div *ngFor="let room of urgent" class="row1">
+                    <div class="col-41" (click)="onClick(room._id)">
+                        <div *ngIf="room.image">
+                            <div>
+                                <img src="{{imgUrl}}{{room.image[0]}}" alt="">
+                            </div>
+
+                        </div>
+                        <div class=" contain">
+                            <p>Room available: {{room.numberOfRoom}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Price: <span>Rs.</span>{{room.price}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Address: {{room.address}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="input-B">
+                <button class="input-bt" routerLink="/room/list" [queryParams]="{urgent:true}">View All Urgent
+                    Rooms...</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- newly listed roomes -->
+
+    <section>
+        <div class="box">
+            <h2 class="title"><a routerLink="/room/list" [queryParams]="{normal:true}"> Newly Listed Rooms</a></h2>
+            <div class="small-container1">
+
+                <div *ngFor="let room of normal" class="row1">
+                    <div class="col-41" (click)="onClick(room._id)">
+                        <div *ngIf="room.image">
+                            <div>
+                                <img src="{{imgUrl}}{{room.image[0]}}" alt="">
+                            </div>
+
+                        </div>
+
+                        <div class="contain">
+                            <p>Rooms Available: {{room.numberOfRoom}}</p>
+                        </div><br>
+                        <div class="contain">
+                            <p>Price: <span>Rs.</span>{{room.price}}</p>
+                        </div><br>
+                        <div class="contain">
+                            <p>Address: {{room.address}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="input-B">
+                <button class="input-bt" routerLink="/room/list" [queryParams]="{normal:true}">View All Newly Listed
+                    Rooms...</button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- recommended  roomes -->
+
+    <section>
+        <div class="box">
+            <h2 class="title"><a routerLink="/room/list"> Recommended Rooms</a></h2>
+            <div class="small-container1">
+
+                <div *ngFor="let room of rooms" class="row1">
+                    <div class="col-41" (click)="onClick(room._id)">
+                        <div *ngIf="room.image">
+                            <div>
+                                <img src="{{imgUrl}}{{room.image[0]}}" alt="">
+                            </div>
+
+                        </div>
+                        <div class=" contain">
+                            <p>Room available: {{room.numberOfRoom}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Price: <span>Rs.</span>{{room.price}}</p>
+                        </div><br>
+                        <div class=" contain">
+                            <p>Address: {{room.address}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="input-B">
+                <button class="input-bt" routerLink="/room/list">View All Recommended Rooms...</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- testimonial -->
+    <section>
+        <div class="box">
+            <div class="testimonial">
+                <div class="small-container">
+                    <h2 class="title">Our Developer</h2>
+                    <div class="row">
+                        <div class="col-4">
+                            <i class="fa fa-quote-left"></i>
+                            <p>
+                                Hi my name is Andy Uzi and I am the BCR.
+                            </p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+
+                            </div>
+                            <img src="./../../../assets/t image/amr.jpg" alt="">
+                            <h3>Andy </h3>
+                        </div>
+                        <div class="col-4">
+                            <i class="fa fa-quote-left"></i>
+                            <p>
+                                Hi my name is SuKul GuNda and I am still learning.
+                            </p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+
+                            </div>
+                            <img src="./../../../assets/t image/sukul.jpg" alt="">
+                            <h3>SuKul </h3>
+                        </div>
+                        <div class="col-4">
+                            <i class="fa fa-quote-left"></i>
+                            <p>
+                                Hi my name is ACEJEE and I am BOSS.
+                            </p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+
+                            </div>
+                            <img src="./../../../assets/t image/acejee.jpg" alt="">
+                            <h3>ACEJEE </h3>
+                        </div>
+                        <div class="col-4">
+                            <i class="fa fa-quote-left"></i>
+                            <p>
+                                Hi my name is DK-BOSS and I am their assistant.
+                            </p>
+                            <div class="rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+
+                            </div>
+                            <img src="./../../../assets/t image/dk.jpg" alt="">
+                            <h3>DK </h3>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- brands -->
+
+
+
+    <section>
+        <div class="box">
+            <div class="brands">
+
+                <div class="small-container">
+                    <h2 class="title">Links</h2>
+                    <!-- <div class="row"> -->
+                    <div class="col-5">
+                        <img src="./../../../assets/image logo/2.jpeg" alt="">
+                    </div>
+                    <div class="col-5">
+                        <img src="./../../../assets/image logo/6.png" alt="">
+                    </div>
+                    <div class="col-5">
+                        <img src="./../../../assets/image logo/3.png" alt="">
+                    </div>a
+                    <div class="col-5">
+                        <img src="./../../../assets/image logo/4.png" alt="">
+                    </div>
+                    <div class="col-5">
+                        <img src="./../../../assets/image logo/5.png" alt="">
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- <app-slider></app-slider> -->
+    <app-footer></app-footer>
+</section>
+
+</html>
+
+<section *ngIf="searching && !blockAll">
+    <br>
+    <br><br> <br><br>
+    <div class="small-container1">
+        <div *ngFor="let room of searchedData" class="row1">
+            <div class="col-41" (click)="roomDashboard(room._id)">
+                <div *ngIf="room.image">
+
+
+                    <div>
+                        <img src="{{imgUrl}}{{room.image[0]}}" alt="" width="200">
+                    </div>
+                </div>
+                <div class=" contain">
+                    <p>Address: {{room.address}}</p>
+                </div>
+                <br>
+                <div class=" contain">
+                    <p>Room available: {{room.numberOfRoom}}</p>
+                </div>
+                <br>
+                <div class=" contain">
+                    <p>Price: <span>Rs.</span>{{room.price}}</p>
+                </div>
+
+            </div>
+            <!-- <div>
+        <ngb-pagination
+        [(page)]="page"
+        [pageSize]="pageSize"
+        [collectionSize]="items.length"></ngb-pagination>
+
+    </div> -->
+            <!-- </div> -->
+
+        </div>
+    </div>
+</section>

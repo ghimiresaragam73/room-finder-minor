@@ -1,0 +1,46 @@
+.center {
+  background: inherit;
+  width: 400px;
+  /* height: 870px; */
+  position: absolute;
+  left: 430px;
+  top: 200px;
+  width: 550px;
+}
+.contain {
+  padding: 20px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, .3);
+}
+
+.button {
+  background-color: #0921f8;;
+  color: white;
+  width: 100px;
+  height: 40px;
+  border-radius: 30px;
+  border-color: 2px #0921f8;;
+}
+.danger{
+  color: red;
+}
+.color {
+  border-color: 2px #0921f8;;
+  border-radius: 12px;
+}
+.link {
+  color: #0921f8;;
+  background-color: transparent;
+  text-decoration: none;
+}
+.genwidth{
+  width: 30px;
+  color: red;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+}

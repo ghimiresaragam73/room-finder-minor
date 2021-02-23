@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<div *ngIf="loading">
+    <app-loader></app-loader>
+</div>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="./home.component.css"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@200&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
+</head>
+
+<body *ngIf="!loading">
+    <section>
+        <div id="content-wrapper">
+
+            <div class="col-2">
+
+                <img id=featured src="{{imageUrl}}{{room.image[i]}}" alt="">
+                <div id='slide-wrapper'>
+                    <div class="arrow">
+                        <i class="fa fa-caret-square-o-left" (click)="left()" style="font-size: 30px"></i>
+
+                    </div>
+
+                    <div id='slider'>
+
+                        <!-- <img class="thumbnail active" src="{{imageUrl}}{{room.image[0]}}" alt=""> -->
+                        <div *ngFor="let image of room.image">
+                            <img class="thumbnail " src="{{imageUrl}}{{image}}">
+                        </div>
+                    </div>
+                    <div class="arrow">
+
+                        <i class="fa fa-caret-square-o-right" (click)="right()" style="font-size: 30px"></i>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-2">
+                <h3>Room Description <i class="fa faident"></i></h3>
+                <br>
+                <p>{{room.description}} </p>
+                <div class="paragraph">
+                    <p>Price:Rs.{{room.price}}</p>
+                </div>
+                <div class="paragraph">
+                    <p>Location:{{room.address}}</p>
+                </div>
+                <div class="paragraph">
+                    <p>No of Room:{{room.numberOfRoom}}</p>
+                </div>
+                <div class="btnn">
+                    <button *ngIf="!authorize" class="i3" routerLink="">Book </button>
+                    <button *ngIf="!authorize" class="i3" (click)="addToCart()">Add to Cart </button>
+                </div>
+                <div>
+                    <button *ngIf="authorize" class="i3" (click)="edit()">edit</button>
+                    <button *ngIf="authorize" (click)="removeRoom(room._id,i)" class="btn btn-danger && i3">Delete</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- <div id="container">
+            <form #contactForm="ngForm" class="form-group && center && contain ">
+                <h3>
+                    seller information
+                </h3>
+                <br>
+
+                <div class="seller-detail">
+                    <div>
+
+                        <img src="./../../../assets/cato/1.jpg" class="seller-detail__img" alt='' />
+
+                    </div>
+                    <div class="seller-detail__information">
+                        <div class="name">Deepika Rawal</div>
+                        <div class="email">mahatmiraj@gmail.com</div>
+                        <div class="number">9860819881</div>
+                    </div>
+                </div>
+                <br>
+                <label for="username">Username</label>
+                <input type="text" class="form-control && color" [(ngModel)]="user.username" name="username" required
+                    #username="ngModel">
+                <div class="danger" [hidden]="username.valid || username.pristine">
+                    required field*
+                </div>
+                <br>
+
+                <label for="email">Email Address</label>
+                <input type="email" class="form-control && color" [(ngModel)]="user.email" name="email" required
+                    #email="ngModel">
+                <div class="danger" [hidden]="email.valid || email.pristine">
+                    required field*
+                </div>
+                <br>
+
+
+                <label for="phone">Phone Number</label>
+                <input type="number" class="form-control && color" [(ngModel)]="user.phone" name="phone" required
+                    #phone="ngModel">
+                <br>
+
+                <label for="gender">Gender</label>
+                <input type="radio" id="male" class="genwidth" value="male" [(ngModel)]="user.gender" name="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" class="genwidth" value="female" [(ngModel)]="user.gender" name="female">
+                <label for="female">Female</label>
+                <input type="radio" id="other" class="genwidth" value="other" [(ngModel)]="user.gender" name="female">
+                <label for="other">Other</label>
+                <br><br>
+
+                <button [disabled]="contactForm.invalid" class="btn btn-primary && button && color">book</button>
+                <br><br>
+
+            </form>
+
+        </div> -->
+
+    </section>
+
+
+
+
+
+    <!-- <section>
+      
+    </section> -->
+
+
+
+
+</body>
+
+</html>
