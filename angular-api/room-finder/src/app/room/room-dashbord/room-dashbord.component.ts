@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from 'src/app/cart/cart.service';
 import { MsgService } from 'src/app/shared/services/msg.service';
+import { UserService } from 'src/app/user/services/user.service';
 import { environment } from 'src/environments/environment';
 import { Room } from '../model/room.model';
 import { RoomService } from '../services/room.service';
@@ -24,18 +25,26 @@ export class RoomDashbordComponent implements OnInit {
   lat;
   lng;
   userId;
+  user: any;
   authorize: boolean = false;
+  dummydata;
   constructor(
     public msgService: MsgService,
     public router: Router,
     public activeRouter: ActivatedRoute,
     public roomService: RoomService,
     public cartService: CartService,
+    public userService: UserService
   ) {
     this.id = this.activeRouter.snapshot.params["id"];
     this.imageUrl = environment.roomImageUrl;
-    this.userId = JSON.parse(localStorage.getItem('user'));
-    this.userId = this.userId._id;
+    if(localStorage.getItem('token')){
+      this.userId = JSON.parse(localStorage.getItem('user'));
+      this.userId = this.userId._id;
+    }
+    this.dummydata={
+      haah:'haha'
+    }
   }
 
   ngOnInit(): void {
@@ -44,6 +53,13 @@ export class RoomDashbordComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.j = data.image.length;
+          this.userService.getById(data.user)
+            .subscribe(
+              (data1: any) => {
+                console.log('data in userservice', data1);
+                this.user = data1;
+              }
+            )
           this.room = data;
           console.log('room user', this.room.user);
           if (this.room.map.isMap) {
@@ -92,15 +108,33 @@ export class RoomDashbordComponent implements OnInit {
         data => {
           console.log('data', data);
           this.msgService.showSuccess('Added');
-          
+
         },
         err => {
           this.msgService.showError(err)
         }
       )
   }
-  edit(){
-    this.router.navigate(['/room/edit/'+this.room._id])
+
+  book(id) {
+    this.roomService.addBook(id,this.dummydata)
+      .subscribe(
+        data => {
+          this.msgService.showSuccess('Booked Success');
+        }, err => { this.msgService.showError(err) }
+      )
+  }
+
+
+  isLoggedIn() {
+    if (localStorage.getItem('token')) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  edit() {
+    this.router.navigate(['/room/edit/' + this.room._id])
   }
   removeRoom(_id, index) {
     let removeConfirm = confirm("Are you sure to delete?");

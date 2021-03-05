@@ -4,14 +4,15 @@
     </div>
 </section>
 
-
+<div *ngIf="!loading && !searchRoom">
+    <br><br><br><br><br><br><br><br>
+    <h3>No Rooms found</h3>
+</div>
 
 <div *ngIf="!loading" class="small-container1">
-    <div *ngFor="let room of rooms| paginate:{itemsPerPage:12, currentPage:p}" class="row1 " >
+    <div *ngFor="let room of rooms| paginate:{itemsPerPage:12, currentPage:p}" class="row1 ">
         <div class="col-41" (click)="roomDashboard(room._id)">
             <div *ngIf="room.image">
-
-
                 <div>
                     <img src="{{imageUrl}}{{room.image[0]}}" alt="" width="200">
                 </div>
@@ -35,7 +36,7 @@
 </div>
 
 <div class="page">
-    <pagination-controls (pageChange)="p =$event" >
+    <pagination-controls (pageChange)="p =$event">
 
     </pagination-controls>
 </div>

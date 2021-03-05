@@ -9,10 +9,12 @@ import { Room } from '../model/room.model';
 export class RoomService {
     url: string;
     token: string;
+    bookUrl: string;
     constructor(
         public http: HttpClient
     ) {
         this.url = environment.baseUrl + '/room';
+        this.bookUrl = environment.baseUrl + '/book'
         this.token = localStorage.getItem('token') || '';
     }
 
@@ -50,6 +52,14 @@ export class RoomService {
     search(condition: any) {
         return this.http.post(`${this.url}/search`, condition, this.getOptions())
     }
+
+    getBook() {
+        return this.http.get(`${this.bookUrl}`, this.getOptions());
+    }
+    addBook(id,dummydata) {
+        return this.http.put(`${this.bookUrl}/${id}`,dummydata, this.getOptions())
+    }
+
 
     upload(data: any, files: Array<any>, httpVerb, URL) {
         return new Observable((observer) => {

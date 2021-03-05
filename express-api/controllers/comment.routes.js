@@ -19,8 +19,8 @@ router.route('/:id')
                     return next(err);
                 if (room) {
                     room.price = 123;
-                    room.comment[0].comment = req.body.comment;
-                    room.comment[0].user = req.loggedInUser._id;
+                    room.comment.comment = req.body.comment;
+                    room.comment.user = req.loggedInUser._id;
                     console.log('aayoo', req.body.comment + ' yeta' + req.loggedInUser._id);
                     room.save((err, saved) => {
                         if (err)

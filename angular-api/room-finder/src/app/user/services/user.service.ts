@@ -28,7 +28,7 @@ export class UserService {
 
 
     edit(id: string, data: any) {
-        return this.http.put(`${this.url}/${id}`, data, this.getOptions());
+        return this.http.put(`${this.url}/edit/${id}`, data, this.getOptions());
     }
 
     getById(id: string) {

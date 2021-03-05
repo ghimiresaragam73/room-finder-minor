@@ -51,6 +51,11 @@ a {
   width: 30px;
   color: #0921f8;;
 }
+.button1{
+  float: right;
+  width: 70px;
+  height:40px;
+}
 
 
 * {

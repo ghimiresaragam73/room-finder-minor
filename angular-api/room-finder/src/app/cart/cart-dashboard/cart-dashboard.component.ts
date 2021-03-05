@@ -31,7 +31,7 @@ export class CartDashboardComponent implements OnInit {
       if (!this.rooms) {
         this.cartService.getAllCart()
           .subscribe(
-            (data) => {
+            (data:any) => {
               console.log(data);
               this.rooms = data[0];
               this.loading = false;
@@ -44,6 +44,10 @@ export class CartDashboardComponent implements OnInit {
 
       }
     // }
+  }
+
+  roomDashboard(id) {
+    this.router.navigate(['/room/dashboard/' + id])
   }
 
 }

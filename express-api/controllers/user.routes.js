@@ -50,6 +50,22 @@ router.route('/')
             })
     })
 
+router.route('/edit/:id')
+    .put((req, res, next) => {
+        userModel.findById(req.params.id)
+            .exec((err, user) => {
+                if (err)
+                    return next(err)
+                if (req.body.roomAddress)
+                    user.roomAddress = req.body.roomAddress
+                user.save((err, saved) => {
+                    if (err)
+                        return next(err)
+                    res.send(saved);
+                })
+            })
+    })
+
 router.route('/:id')
     .get((req, res, next) => {
         userModel.findById(req.params.id)
@@ -72,7 +88,7 @@ router.route('/:id')
             })
     })
     .put(authentication, upload.single('img'), (req, res, next) => {
-        console.log('req.file', req.file);
+        console.log('req.body', req.body);
         if (req.fileError) {
             imageDelete(req.file.filename);
             return next({
@@ -88,9 +104,7 @@ router.route('/:id')
                     var oldImage = user.image;
                     console.log('old image>>>'.oldImage);
                     var updatedUser = userHelp(req.body, user);
-                    console.log('updated user',updatedUser);
-                    if (updatedUser)
-                       return next("Password doesn't match")
+                    console.log('updated user', updatedUser);
                     if (req.file) {
                         updatedUser.image = req.file.filename;
                         imageDelete(oldImage);
@@ -105,5 +119,6 @@ router.route('/:id')
                 }
             })
     })
+
 
 module.exports = router;

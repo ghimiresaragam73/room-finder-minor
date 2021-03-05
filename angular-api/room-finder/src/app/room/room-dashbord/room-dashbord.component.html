@@ -15,7 +15,9 @@
 </head>
 
 <body *ngIf="!loading">
+
     <section>
+
         <div id="content-wrapper">
 
             <div class="col-2">
@@ -41,7 +43,16 @@
 
                 </div>
             </div>
+
             <div class="col-2">
+
+                <div *ngIf="isLoggedIn()" class="seller-detail__information">
+                    <h3>Landlord Information</h3>
+                    <div class="name">{{user.name}}</div>
+                    <div>{{user.email}}</div>
+                    <div>{{user.phone}}</div>
+                </div>
+<br>
                 <h3>Room Description <i class="fa faident"></i></h3>
                 <br>
                 <p>{{room.description}} </p>
@@ -55,12 +66,13 @@
                     <p>No of Room:{{room.numberOfRoom}}</p>
                 </div>
                 <div class="btnn">
-                    <button *ngIf="!authorize" class="i3" routerLink="">Book </button>
+                    <button *ngIf="!authorize" class="i3" (click)="book(room._id)">Book </button>
                     <button *ngIf="!authorize" class="i3" (click)="addToCart()">Add to Cart </button>
                 </div>
                 <div>
                     <button *ngIf="authorize" class="i3" (click)="edit()">edit</button>
-                    <button *ngIf="authorize" (click)="removeRoom(room._id,i)" class="btn btn-danger && i3">Delete</button>
+                    <button *ngIf="authorize" (click)="removeRoom(room._id,i)"
+                        class="btn btn-danger && i3">Delete</button>
                 </div>
 
             </div>
