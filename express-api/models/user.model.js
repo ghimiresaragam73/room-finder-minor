@@ -11,7 +11,7 @@ var userSchema = new Schema({
     },
     password: {
         required: true,
-        type: String
+        type: String,
     },
     email: {
         type: String,
@@ -45,7 +45,8 @@ var userSchema = new Schema({
     book: {
         type: String,
         default: false
-    }
+    },
+    roomAddress: String
 }, {
     timestamps: true
 })

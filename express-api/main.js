@@ -28,7 +28,7 @@ express.use('/auth', authRoutes);
 express.use('/user', authenticate, userRoutes);
 express.use('/room', roomRoutes);
 express.use('/cart', authenticate, cartRoutes);
-express.use('/book', authenticate, bookingRoutes);
+express.use('/book', bookingRoutes);
 express.use('/comment', commentRoutes);
 
 express.use((req, res, next) => {

@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
             console.log('data', data);
             this.rooms = data[0].concat(data[2].concat(data[1]))
             let length = this.rooms.length
-            this.rooms = this.rooms.splice(4,length-8)
+            this.rooms = this.rooms.splice(4, length - 8)
             console.log('yaha>>>>>>', this.rooms);
             /* console.log('data here', this.category); */
           }, err => {
@@ -51,11 +51,11 @@ export class HomeComponent implements OnInit {
       this.loading = false;
     }
   }
-  onClick(id) {
-    console.log('button clicked');
-    this.router.navigate(['/room/dashboard/' + id]);
-
-  }
+  /*  roomDashboard(id) {
+     console.log('button clicked');
+     this.router.navigate(['/room/dashboard/' + id]);
+ 
+   } */
   /* Nav bar ma role check garney tarika */
   /* isRenter(){
     var user = localStorage.getItem('user');
@@ -93,6 +93,7 @@ export class HomeComponent implements OnInit {
   }
 
   roomDashboard(id) {
+    console.log('rooDashboard ma ', id);
     this.router.navigate(['/room/dashboard/' + id])
   }
 }

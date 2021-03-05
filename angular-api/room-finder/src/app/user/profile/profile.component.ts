@@ -26,34 +26,34 @@ export class ProfileComponent implements OnInit {
     public uploadService: UploadService
 
   ) {
-    this.url = environment.baseUrl + '/user';
+    this.data = JSON.parse(localStorage.getItem('user'));
+    this.url = environment.baseUrl + '/user'
     this.userImage = environment.userImageUrl;
   }
 
   ngOnInit(): void {
-      this.data = JSON.parse(localStorage.getItem('user'));
-      this.userService.getById(this.data._id)
-        .subscribe(
-          (data: any) => {
-            this.user = data;
-            if (data.image != undefined)
-              this.check = true;
-            this.loading = false;
-          }
-        )
+    this.userService.getById(this.data._id)
+      .subscribe(
+        (data: any) => {
+          this.user = data;
+          if (data.image != undefined)
+            this.check = true;
+          this.loading = false;
+        }
+      )
   }
 
   edit() {
-    this.uploadService.upload(this.user,this.filesToUpload,"PUT",this.url)
+    this.uploadService.upload(this.user, this.filesToUpload, "PUT", this.url)
       .subscribe(
-        (data:any) => {
+        (data: any) => {
           this.msgService.showSuccess('Edit Success');
           console.log('data>>>>>>>>>>', data);
-          if(data.image!=undefined)
-          this.check=true
+          if (data.image != undefined)
+            this.check = true
           this.viewChanged();
         }, err => {
-          this.msgService.showError('err aayo');
+          this.msgService.showError(err);
         }
       )
   }

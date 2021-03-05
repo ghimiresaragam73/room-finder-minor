@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
         token = req.headers['token'];
     if (req.query.token)
         token = req.query.token;
+        console.log('token aayooo',token)
     if (token) {
         jwt.verify(token, config.jwtSecretKey, (err, done) => {
             if (err) {

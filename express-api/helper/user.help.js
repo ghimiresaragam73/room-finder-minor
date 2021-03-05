@@ -18,7 +18,6 @@ module.exports = (req, user) => {
     } else {
         return true
     }
-
     if (req.email)
         user.email = req.email;
     if (req.phone)
@@ -29,5 +28,7 @@ module.exports = (req, user) => {
         user.gender = req.gender;
     if (req.role)
         user.role = req.role;
+    if (req.roomAddress)
+        user.roomAddress = req.roomAddress;
     return user;
 }
